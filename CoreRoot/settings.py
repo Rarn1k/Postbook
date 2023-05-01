@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'core.user',
     'core.auth',
     'core.post',
+    'core.comment',
 ]
 
 MIDDLEWARE = [
