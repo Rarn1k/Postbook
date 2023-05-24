@@ -2,7 +2,7 @@ from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from core.abtract.viewsets import AbstractViewSet
+from core.abstract.viewsets import AbstractViewSet
 from core.auth.permissions import UserPermission
 from core.post.models import Post
 from core.post.serializers import PostSerializer
@@ -12,6 +12,7 @@ class PostViewSet(AbstractViewSet):
     http_method_names = ('post', 'get', 'put', 'delete')
     permission_classes = (UserPermission,)
     serializer_class = PostSerializer
+    filterset_fields = ['author__public_id']
 
     def get_queryset(self):
         return Post.objects.all()
@@ -33,7 +34,7 @@ class PostViewSet(AbstractViewSet):
         post = self.get_object()
         user = self.request.user
         user.like(post)
-        serializer = self.serializer_class(post)
+        serializer = self.serializer_class(post, context={'request': request})
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     @action(methods=['post'], detail=True)
@@ -41,5 +42,5 @@ class PostViewSet(AbstractViewSet):
         post = self.get_object()
         user = self.request.user
         user.remove_like(post)
-        serializer = self.serializer_class(post)
+        serializer = self.serializer_class(post, context={'request': request})
         return Response(serializer.data, status=status.HTTP_200_OK)

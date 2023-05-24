@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
-from core.abtract.serializers import AbstractSerializer
+from core.abstract.serializers import AbstractSerializer
 from core.post.models import Post
 from core.user.models import User
 from core.user.serializers import UserSerializer
@@ -11,6 +11,10 @@ class PostSerializer(AbstractSerializer):
     author = serializers.SlugRelatedField(queryset=User.objects.all(), slug_field='public_id')
     liked = serializers.SerializerMethodField()
     likes_count = serializers.SerializerMethodField()
+    comments_count = serializers.SerializerMethodField()
+
+    def get_comments_count(self, instance):
+        return instance.comment_set.count()
 
     def validate_author(self, value):
         if self.context["request"].user != value:
@@ -41,5 +45,5 @@ class PostSerializer(AbstractSerializer):
 
     class Meta:
         model = Post
-        fields = ['id', 'author', 'body', 'edited', 'liked', 'likes_count', 'created', 'updated']
+        fields = ['id', 'author', 'body', 'edited', 'liked', 'likes_count', 'comments_count', 'created', 'updated']
         read_only_fields = ["edited"]

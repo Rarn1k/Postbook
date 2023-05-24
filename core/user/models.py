@@ -3,7 +3,12 @@ import uuid
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
 
-from core.abtract.models import AbstractManager, AbstractModel
+from core.abstract.models import AbstractManager, AbstractModel
+
+
+def user_directory_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
+    return 'user_{0}/{1}'.format(instance.public_id, filename)
 
 
 class UserManager(BaseUserManager, AbstractManager):
@@ -49,7 +54,7 @@ class User(AbstractModel, AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
     bio = models.TextField(null=True)
-    avatar = models.ImageField(null=True)
+    avatar = models.ImageField(null=True, blank=True, upload_to=user_directory_path)
     posts_liked = models.ManyToManyField("core_post.Post", related_name="liked_by")
 
     USERNAME_FIELD = 'username'

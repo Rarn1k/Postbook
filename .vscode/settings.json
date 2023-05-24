@@ -1,0 +1,23 @@
+{
+    "terminal.integrated.automationProfile.windows": {},
+    "terminal.integrated.env.windows": {},
+    "terminal.integrated.profiles.windows": {
+
+        "PowerShell": {
+            "path": "${env:windir}\\Program Files\\PowerShell 7.2.6\\pwsh.exe",
+            "source": "PowerShell",
+            "icon": "terminal-powershell"
+        },
+        "Command Prompt": {
+            "path": [
+                "${env:windir}\\Sysnative\\cmd.exe",
+                "${env:windir}\\System32\\cmd.exe"
+            ],
+            "args": [],
+            "icon": "terminal-cmd"
+        },
+        "Git Bash": {
+            "source": "Git Bash"
+        }
+    }
+}

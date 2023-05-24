@@ -1,6 +1,6 @@
 from django.db import models
 
-from core.abtract.models import AbstractManager, AbstractModel
+from core.abstract.models import AbstractManager, AbstractModel
 
 
 class PostManager(AbstractManager):
