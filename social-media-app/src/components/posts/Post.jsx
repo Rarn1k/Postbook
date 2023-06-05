@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { format } from "timeago.js";
 import { LikeFilled, CommentOutlined, LikeOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
 import { Image, Card, Dropdown } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import axiosService from "../../helpers/axios";
 import { getUser } from "../../hooks/user.actions";
 import UpdatePost from "./UpdatePost";
@@ -48,7 +48,7 @@ function Post(props) {
 
   return (
     <>
-      <Card className="rounded-3 my-4">
+      <Card className="rounded-3 my-4" data-testid="post-test">
         <Card.Body>
           <Card.Title className="d-flex flex-row justify-content-between">
             <div className="d-flex flex-row">
@@ -84,34 +84,32 @@ function Post(props) {
             )}
           </Card.Title>
           <Card.Text>{post.body}</Card.Text>
-          <div className="d-flex flex-row justify-content-between">
-            <div className="d-flex flex-row">
-              <LikeFilled
-                style={{
-                  color: "#fff",
-                  backgroundColor: "#0D6EFD",
-                  borderRadius: "50%",
-                  width: "18px",
-                  height: "18px",
-                  fontSize: "75%",
-                  padding: "2px",
-                  margin: "3px",
-                }}
-              />
-              <p className="ms-1 fs-6">
-                <small>{post.likes_count} like</small>
-              </p>
-            </div>
-            {!isSinglePost && (
-              <p className="ms-1 fs-6">
-                <small>
-                  <Link to={`/post/${post.id}/`}>
-                    {post.comments_count} comments
-                  </Link>
-                </small>
-              </p>
-            )}
+          <div className="d-flex flex-row">
+            <LikeFilled
+              style={{
+                color: "#fff",
+                backgroundColor: "#0D6EFD",
+                borderRadius: "50%",
+                width: "18px",
+                height: "18px",
+                fontSize: "75%",
+                padding: "2px",
+                margin: "3px",
+              }}
+            />
+            <p className="ms-1 fs-6">
+              <small>{post.likes_count} like</small>
+            </p>
           </div>
+          {!isSinglePost && (
+            <p className="ms-1 fs-6">
+              <small>
+                <Link to={`/post/${post.id}/`}>
+                  {post.comments_count} comments
+                </Link>
+              </small>
+            </p>
+          )}
         </Card.Body>
         <Card.Footer className="d-flex bg-white w-50 justify-content-between border-0">
           <div className="d-flex flex-row">

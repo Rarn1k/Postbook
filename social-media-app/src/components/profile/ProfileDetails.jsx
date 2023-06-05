@@ -13,7 +13,10 @@ function ProfileDetails(props) {
 
   return (
     <div>
-      <div className="d-flex flex-row border-bottom p-5">
+      <div
+        className="d-flex flex-row border-bottom p-5"
+        data-testid="profile-details"
+      >
         <Image
           src={user.avatar}
           roundedCircle
@@ -30,8 +33,8 @@ function ProfileDetails(props) {
           {user.id === getUser().id && (
             <Button
               variant="primary"
-              size="sm"
-              className="w-25"
+              size="small"
+              className="w-100"
               onClick={() => navigate(`/profile/${user.id}/edit/`)}
             >
               Edit

@@ -5,7 +5,6 @@ import {
   getRefreshToken,
   getUser,
 } from "../hooks/user.actions";
-
 const axiosService = axios.create({
   baseURL: "http://localhost:8000/api",
   headers: {
@@ -43,7 +42,7 @@ const refreshAuthLogic = async (failedRequest) => {
         "Bearer " + access;
       localStorage.setItem(
         "auth",
-        JSON.stringify({ access, refresh: getRefreshToken(), user: getUser() })
+        JSON.stringify({ access, refresh: getRefreshToken(), user: getUser()})
       );
     })
     .catch(() => {

@@ -1,9 +1,7 @@
 import React from "react";
 import { Toast, ToastContainer } from "react-bootstrap";
-
 function Toaster(props) {
   const { showToast, title, message, onClose, type } = props;
-
   return (
     <ToastContainer position="top-center">
       <Toast onClose={onClose} show={showToast} delay={3000} autohide bg={type}>
@@ -17,5 +15,4 @@ function Toaster(props) {
     </ToastContainer>
   );
 }
-
 export default Toaster;

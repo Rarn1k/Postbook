@@ -2,8 +2,8 @@ import { faker } from "@faker-js/faker";
 import { v4 as uuid4 } from "uuid";
 
 function userFixtures() {
-  const firstName = faker.name.firstName();
-  const lastName = faker.name.lastName();
+  const firstName = faker.person.firstName();
+  const lastName = faker.person.lastName();
 
   return {
     id: uuid4(),

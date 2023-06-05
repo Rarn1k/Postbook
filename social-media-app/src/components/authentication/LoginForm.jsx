@@ -1,14 +1,10 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
-
 import { useUserActions } from "../../hooks/user.actions";
 
 function LoginForm() {
   const [validated, setValidated] = useState(false);
-  const [form, setForm] = useState({
-    username: "",
-    password: "",
-  });
+  const [form, setForm] = useState({ username: "", password: "" });
   const [error, setError] = useState(null);
   const userActions = useUserActions();
 
@@ -33,7 +29,6 @@ function LoginForm() {
       }
     });
   };
-
   return (
     <Form
       id="registration-form"
@@ -41,6 +36,7 @@ function LoginForm() {
       noValidate
       validated={validated}
       onSubmit={handleSubmit}
+      data-testid="login-form"
     >
       <Form.Group className="mb-3">
         <Form.Label>Username</Form.Label>
@@ -50,12 +46,12 @@ function LoginForm() {
           required
           type="text"
           placeholder="Enter username"
+          data-testid="username-field"
         />
         <Form.Control.Feedback type="invalid">
           This file is required.
         </Form.Control.Feedback>
       </Form.Group>
-
       <Form.Group className="mb-3">
         <Form.Label>Password</Form.Label>
         <Form.Control
@@ -65,19 +61,23 @@ function LoginForm() {
           required
           type="password"
           placeholder="Password"
+          data-testid="password-field"
         />
         <Form.Control.Feedback type="invalid">
           Please provide a valid password.
         </Form.Control.Feedback>
       </Form.Group>
-
+      
       <div className="text-content text-danger">{error && <p>{error}</p>}</div>
 
-      <Button variant="primary" type="submit">
+      <Button
+        disabled={!form.password || !form.username}
+        variant="primary"
+        type="submit"
+      >
         Submit
       </Button>
     </Form>
   );
 }
-
 export default LoginForm;
