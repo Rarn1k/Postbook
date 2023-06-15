@@ -25,8 +25,7 @@ load_dotenv()
 ENV = os.environ.get("ENV")
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get(
-    "SECRET_KEY", default='django-insecure-(id@g!iwr+78b^q^5xs4a-nuuq+(0uotw6v$2+#+!l-d63efkr')
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False if ENV == "PROD" else True
@@ -131,7 +130,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -143,7 +142,7 @@ AUTH_USER_MODEL = 'core_user.User'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework_simplejwt.authentication.JWTAuthentication',),
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination', 'PAGE_SIZE': 15,
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination', 'PAGE_SIZE': 100,
 }
 
 # CORS settings
@@ -154,6 +153,6 @@ CORS_ALLOWED_ORIGINS = [
 
 # Media files
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'uploads'
+MEDIA_ROOT = BASE_DIR / '/uploads'
 
-DEFAULT_AVATAR_URL = "https://avatars.dicebear.com/api/identicon/.svg"
+DEFAULT_AVATAR_URL = 'https://res.cloudinary.com/deues3qyn/image/upload/v1676499936/avatar.png'

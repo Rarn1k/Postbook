@@ -36,28 +36,28 @@ function UpdatePost(props) {
         handleClose();
         setToaster({
           type: "success",
-          message: "Post updated 🚀",
+          message: "Запись отредактирована 🚀",
           show: true,
-          title: "Success!",
+          title: "Успех",
         });
         refresh();
       })
       .catch(() => {
         setToaster({
           type: "danger",
-          message: "An error occurred.",
+          message: "Не удалось отредактировать запись",
           show: true,
-          title: "Post Error",
+          title: "Ошибка",
         });
       });
   };
   return (
     <>
-      <Dropdown.Item data-testid="show-modal-form" onClick={handleShow}>Modify</Dropdown.Item>
+      <Dropdown.Item data-testid="show-modal-form" onClick={handleShow}>Редактировать</Dropdown.Item>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton className="border-0">
-          <Modal.Title>Update Post</Modal.Title>
+          <Modal.Title>Редактировать запись</Modal.Title>
         </Modal.Header>
         <Modal.Body className="border-0">
           <Form
@@ -84,7 +84,7 @@ function UpdatePost(props) {
             variant="primary"
             onClick={handleSubmit}
           >
-            Modify
+            Редактировать
           </Button>
         </Modal.Footer>
       </Modal>

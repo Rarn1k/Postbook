@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "../../../helpers/test-utils";
+import { render, screen } from "../../../helpers/test-utils";
 import userFixtures from "../../../helpers/fixtures/user";
 import ProfileDetails from "../ProfileDetails";
 import { setUserData } from "../../../hooks/user.actions";

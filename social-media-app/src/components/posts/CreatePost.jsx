@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Button, Modal, Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import axiosService from "../../helpers/axios";
 import { getUser } from "../../hooks/user.actions";
 import { Context } from "../Layout";
@@ -8,92 +8,74 @@ function CreatePost(props) {
   const { refresh } = props;
   const [validated, setValidated] = useState(false);
   const [form, setForm] = useState({ author: "", body: "" });
-  const [show, setShow] = useState(false);
   const { setToaster } = useContext(Context);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   const user = getUser();
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    const createPostForm = event.currentTarget;
-    if (createPostForm.checkValidity() === false) {
-      event.stopPropagation();
+    if (form.body) {
+      event.preventDefault();
+      const createPostForm = event.currentTarget;
+      if (createPostForm.checkValidity() === false) {
+        event.stopPropagation();
+      }
+      setValidated(true);
+      const data = {
+        author: user.id,
+        body: form.body,
+      };
+
+      axiosService
+        .post("/post/", data)
+        .then(() => {
+          setToaster({
+            type: "success",
+            message: "Запись опубликована 🚀",
+            show: true,
+            title: "Успех",
+          });
+          setForm({...form, body: ""});
+          refresh();
+        })
+        .catch((error) => {
+          setToaster({
+            type: "danger",
+            message: "Не удалось опубликовать запись",
+            show: true,
+            title: "Ошибка",
+          });
+        });
     }
-    setValidated(true);
-    const data = {
-      author: user.id,
-      body: form.body,
-    };
-    axiosService
-      .post("/post/", data)
-      .then(() => {
-        handleClose();
-        setToaster({
-          type: "success",
-          message: "Post created 🚀",
-          show: true,
-          title: "Post Success",
-        });
-        setForm({});
-        refresh();
-      })
-      .catch((error) => {
-        setToaster({
-          type: "danger",
-          message: "An error occurred.",
-          show: true,
-          title: "Post Error",
-        });
-      });
   };
   return (
     <>
-      <Form.Group className="my-3 w-75">
-        <Form.Control
-          className="py-2 rounded-pill border-primarytext-primary"
-          data-testid="show-modal-form"
-          type="text"
-          placeholder="Write a post"
-          onClick={handleShow}
-        />
-      </Form.Group>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton className="border-0">
-          <Modal.Title>Create Post</Modal.Title>
-        </Modal.Header>
-        <Modal.Body className="border-0">
-          <Form
-            noValidate
-            validated={validated}
-            onSubmit={handleSubmit}
-            data-testid="create-post-form"
-          >
-            <Form.Group className="mb-3">
-              <Form.Control
-                name="body"
-                data-testid="post-body-field"
-                value={form.body}
-                onChange={(e) => setForm({ ...form, body: e.target.value })}
-                as="textarea"
-                rows={3}
-              />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button
-            variant="primary"
-            onClick={handleSubmit}
-            disabled={!form.body}
-            data-testid="create-post-submit"
-          >
-            Post
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <Form
+        noValidate
+        validated={validated}
+        onSubmit={handleSubmit}
+        className="w-100 my-3"
+        data-testid="create-post-form"
+      >
+        <Form.Group>
+          <Form.Control
+            name="body"
+            className="border-primarytext-primary"
+            value={form.body}
+            data-testid="post-body-field"
+            as="textarea"
+            placeholder="Поделитесь своими мюслями"
+            onChange={(e) => setForm({ ...form, body: e.target.value })}
+          />
+        </Form.Group>
+      </Form>
+      <Button
+        variant="primary"
+        onClick={handleSubmit}
+        data-testid="create-post-submit"
+        className="my-2"
+      >
+        Опубликовать
+      </Button>
     </>
   );
 }

@@ -54,9 +54,9 @@ function UpdateProfileForm(props) {
       .then(() => {
         setToaster({
           type: "success",
-          message: "Profile updated successfully 🚀",
+          message: "Профиль успешно редактирован 🚀",
           show: true,
-          title: "Profile updated",
+          title: "Профиль редактирован",
         });
         navigate(-1);
       })
@@ -75,7 +75,7 @@ function UpdateProfileForm(props) {
       onSubmit={handleSubmit}
     >
       <Form.Group className="mb-3 d-flex flex-column">
-        <Form.Label className="text-center">Avatar</Form.Label>
+        <Form.Label className="text-center">Фотография профиля</Form.Label>
         <Image
           src={form.avatar}
           roundedCircle
@@ -90,50 +90,50 @@ function UpdateProfileForm(props) {
           size="sm"
         />
         <Form.Control.Feedback type="invalid">
-          This file is required.
+          Данное поле обязательно.
         </Form.Control.Feedback>
       </Form.Group>
       <Form.Group className="mb-3">
-        <Form.Label>First Name</Form.Label>
+        <Form.Label>Имя</Form.Label>
         <Form.Control
           value={form.first_name}
           onChange={(e) => setForm({ ...form, first_name: e.target.value })}
           required
           type="text"
-          placeholder="Enter first name"
+          placeholder="Введите имя"
         />
         <Form.Control.Feedback type="invalid">
-          This file is required.
+        Данное поле обязательно.
         </Form.Control.Feedback>
       </Form.Group>
       <Form.Group className="mb-3">
-        <Form.Label>Last name</Form.Label>
+        <Form.Label>Фамилия</Form.Label>
         <Form.Control
           value={form.last_name}
           onChange={(e) => setForm({ ...form, last_name: e.target.value })}
           required
           type="text"
-          placeholder="Enter last name"
+          placeholder="Введите фамилию"
         />
         <Form.Control.Feedback type="invalid">
-          This file is required.
+        Данное поле обязательно.
         </Form.Control.Feedback>
       </Form.Group>
       <Form.Group className="mb-3">
-        <Form.Label>Bio</Form.Label>
+        <Form.Label>Информация о себе</Form.Label>
         <Form.Control
           value={form.bio}
           onChange={(e) => setForm({ ...form, bio: e.target.value })}
           as="textarea"
           rows={3}
-          placeholder="A simple bio ... (Optional)"
+          placeholder="Введите информацию о себе ... (по желанию)"
         />
       </Form.Group>
 
       <div className="text-content text-danger">{error && <p>{error}</p>}</div>
 
       <Button variant="primary" type="submit">
-        Save changes
+        Сохранить изменения
       </Button>
     </Form>
   );

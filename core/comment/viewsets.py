@@ -16,8 +16,6 @@ class CommentViewSet(AbstractViewSet):
     serializer_class = CommentSerializer
 
     def get_queryset(self):
-        if self.request.user.is_superuser:
-            return Comment.objects.all()
         post_pk = self.kwargs['post_pk']
         if post_pk is None:
             return Http404

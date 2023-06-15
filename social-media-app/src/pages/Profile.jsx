@@ -4,7 +4,7 @@ import Layout from "../components/Layout";
 import ProfileDetails from "../components/profile/ProfileDetails";
 import useSWR from "swr";
 import { fetcher } from "../helpers/axios";
-import Post from "../components/posts/Post";
+import PostOfUser from "../components/posts/PostsOfUser";
 import { Row, Col } from "react-bootstrap";
 
 function Profile() {
@@ -24,7 +24,7 @@ function Profile() {
           <div>
             <Row className="my-4">
               {posts.data?.results.map((post, index) => (
-                <Post key={index} post={post} refresh={posts.mutate} />
+                <PostOfUser user={user.data} key={index} post={post} refresh={posts.mutate} />
               ))}
             </Row>
           </div>

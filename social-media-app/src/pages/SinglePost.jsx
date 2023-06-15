@@ -33,7 +33,7 @@ function SinglePost() {
           </Col>
         </Row>
       ) : (
-        <div>Loading...</div>
+        <div>Загрузка...</div>
       )}
     </Layout>
   );

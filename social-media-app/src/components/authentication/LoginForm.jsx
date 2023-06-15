@@ -25,7 +25,8 @@ function LoginForm() {
 
     userActions.login(data).catch((err) => {
       if (err.message) {
-        setError(err.request.response);
+        setError(err.response.data.detail);
+        console.log(err);
       }
     });
   };
@@ -39,13 +40,13 @@ function LoginForm() {
       data-testid="login-form"
     >
       <Form.Group className="mb-3">
-        <Form.Label>Username</Form.Label>
+        <Form.Label>Логин</Form.Label>
         <Form.Control
           value={form.username}
           onChange={(e) => setForm({ ...form, username: e.target.value })}
           required
           type="text"
-          placeholder="Enter username"
+          placeholder="Введите логин"
           data-testid="username-field"
         />
         <Form.Control.Feedback type="invalid">
@@ -53,29 +54,29 @@ function LoginForm() {
         </Form.Control.Feedback>
       </Form.Group>
       <Form.Group className="mb-3">
-        <Form.Label>Password</Form.Label>
+        <Form.Label>Пароль</Form.Label>
         <Form.Control
           value={form.password}
           minLength="8"
           onChange={(e) => setForm({ ...form, password: e.target.value })}
           required
           type="password"
-          placeholder="Password"
+          placeholder="Введите пароль"
           data-testid="password-field"
         />
         <Form.Control.Feedback type="invalid">
-          Please provide a valid password.
+          Пожалуйста, введите корректный пароль.
         </Form.Control.Feedback>
       </Form.Group>
       
-      <div className="text-content text-danger">{error && <p>{error}</p>}</div>
+      <div className="text-content text-danger">{<p>{error}</p>}</div>
 
       <Button
         disabled={!form.password || !form.username}
         variant="primary"
         type="submit"
       >
-        Submit
+        Войти
       </Button>
     </Form>
   );

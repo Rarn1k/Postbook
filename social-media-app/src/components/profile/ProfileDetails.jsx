@@ -8,7 +8,7 @@ function ProfileDetails(props) {
   const navigate = useNavigate();
 
   if (!user) {
-    return <div>Loading...</div>;
+    return <div>Загрузка...</div>;
   }
 
   return (
@@ -28,7 +28,7 @@ function ProfileDetails(props) {
           <p className="fs-4 m-0">{user.name}</p>
           <p className="fs-5">{user.bio ? user.bio : "(No bio.)"}</p>
           <p className="fs-6">
-            <small>{user.posts_count} posts</small>
+            <small>{user.posts_count} мюслей</small>
           </p>
           {user.id === getUser().id && (
             <Button
@@ -37,7 +37,7 @@ function ProfileDetails(props) {
               className="w-100"
               onClick={() => navigate(`/profile/${user.id}/edit/`)}
             >
-              Edit
+              Редактировать профиль
             </Button>
           )}
         </div>

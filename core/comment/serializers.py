@@ -16,7 +16,7 @@ class CommentSerializer(AbstractSerializer):
 
     def validate_author(self, value):
         if self.context["request"].user != value:
-            raise ValidationError("You can't create a post for another user.")
+            raise ValidationError("You can't create a comment for another user.")
         return value
 
     def validate_post(self, value):
@@ -48,7 +48,6 @@ class CommentSerializer(AbstractSerializer):
 
     def get_likes_count(self, instance):
         return instance.commented_by.count()
-
 
     class Meta:
         model = Comment

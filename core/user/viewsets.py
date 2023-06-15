@@ -10,6 +10,7 @@ class UserViewSet(AbstractViewSet):
     http_method_names = ('patch', 'get')
     permission_classes = (IsAuthenticated, UserPermission,)
     serializer_class = UserSerializer
+    ordering = UserSerializer().data
 
     def get_queryset(self):
         if self.request.user.is_superuser:

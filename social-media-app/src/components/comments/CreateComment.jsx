@@ -14,37 +14,39 @@ function CreateComment(props) {
   const user = getUser();
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    const createCommentForm = event.currentTarget;
-    if (createCommentForm.checkValidity() === false) {
-      event.stopPropagation();
+    if (form.body) {
+      event.preventDefault();
+      const createCommentForm = event.currentTarget;
+      if (createCommentForm.checkValidity() === false) {
+        event.stopPropagation();
+      }
+      setValidated(true);
+      const data = {
+        author: user.id,
+        body: form.body,
+        post: postId,
+      };
+      axiosService
+        .post(`/post/${postId}/comment/`, data)
+        .then(() => {
+          setForm({ ...form, body: "" });
+          setToaster({
+            type: "success",
+            message: "Комментарий успешно отправлен 🚀",
+            show: true,
+            title: "Успех",
+          });
+          refresh();
+        })
+        .catch(() => {
+          setToaster({
+            type: "danger",
+            message: "Не удалось отправить комментарий",
+            show: true,
+            title: "Ошибка",
+          });
+        });
     }
-    setValidated(true);
-    const data = {
-      author: user.id,
-      body: form.body,
-      post: postId,
-    };
-    axiosService
-      .post(`/post/${postId}/comment/`, data)
-      .then(() => {
-        setForm({ ...form, body: "" });
-        setToaster({
-          type: "success",
-          message: "Comment posted successfully🚀",
-          show: true,
-          title: "Comment!",
-        });
-        refresh();
-      })
-      .catch(() => {
-        setToaster({
-          type: "danger",
-          message: "",
-          show: true,
-          title: "An error occurred.!",
-        });
-      });
   };
 
   return (
@@ -64,10 +66,10 @@ function CreateComment(props) {
       />
       <Form.Group className="m-3 w-75">
         <Form.Control
-          className="py-2 rounded-pill border-primary"
-          type="text"
+          className="py-2 border-primary"
+          as="textarea"
           data-testid="comment-body-field"
-          placeholder="Write a comment"
+          placeholder="Напишите комментарий"
           value={form.body}
           name="body"
           onChange={(e) => setForm({ ...form, body: e.target.value })}
@@ -78,10 +80,9 @@ function CreateComment(props) {
           variant="primary"
           data-testid="create-comment-submit"
           onClick={handleSubmit}
-          disabled={!form.body}
           size="small"
         >
-          Comment
+          Отправить
         </Button>
       </div>
     </Form>

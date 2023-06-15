@@ -23,7 +23,7 @@ function ProfileCard(props) {
         <Card.Body>
           <Card.Title className="fs-6">{user.name}</Card.Title>
           <Button variant="primary" onClick={handleNavigateToProfile}>
-            See profile
+            Профиль
           </Button>
         </Card.Body>
       </div>

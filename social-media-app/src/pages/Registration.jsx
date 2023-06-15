@@ -7,13 +7,13 @@ function Registration() {
       <div className="row">
         <div className="col-md-6 d-flex align-items-center">
           <div className="content text-center px-4">
-            <h1 className="text-primary">Welcome to Postman!</h1>
+            <h1 className="text-primary">Добро пожаловать в Мюсли!</h1>
             <p className="content">
-              This is a new social media site that will allow you to share your
-              thoughts and experiences with your friends. Register now and start
-              enjoying! <br />
-              Or if you already have an account, please{""}
-              <Link to="/login/">login</Link>.
+              Это новая социальная сеть, которая позволит вам делиться вашими
+              мыслями и новостями с вашими друзьясм. Зарегистрируйтесь сейчас 
+              и начните пользоваться! <br />
+              Или, если вы уже имеете акаунт, вы можете{" "}
+              <Link to="/login/">войти</Link>.
             </p>
           </div>
         </div>

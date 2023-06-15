@@ -41,18 +41,18 @@ function UpdateComment(props) {
         handleClose();
         setToaster({
           type: "success",
-          message: "Comment updated 🚀",
+          message: "Комментарий отредактирован 🚀",
           show: true,
-          title: "Success!",
+          title: "Успех",
         });
         refresh();
       })
       .catch(() => {
         setToaster({
           type: "danger",
-          message: "An error occurred.",
+          message: "Не удалось отредактировать комментарий",
           show: true,
-          title: "Comment Error",
+          title: "Ошибка",
         });
       });
   };
@@ -60,12 +60,12 @@ function UpdateComment(props) {
   return (
     <>
       <Dropdown.Item data-testid="show-modal-form" onClick={handleShow}>
-        Modify
+        Редактировать
       </Dropdown.Item>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton className="border-0">
-          <Modal.Title>Update Post</Modal.Title>
+          <Modal.Title>Редактировать комментарий</Modal.Title>
         </Modal.Header>
         <Modal.Body className="border-0">
           <Form
@@ -92,7 +92,7 @@ function UpdateComment(props) {
             variant="primary"
             onClick={handleSubmit}
           >
-            Modify
+            Редактировать
           </Button>
         </Modal.Footer>
       </Modal>

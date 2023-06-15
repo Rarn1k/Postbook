@@ -24,7 +24,7 @@ function Navigationbar() {
     <Navbar bg="primary" variant="dark">
       <Container>
         <Navbar.Brand className="fw-bold" as={Link} to={`/`}>
-          Postagram
+          Мюсли
         </Navbar.Brand>
         <Navbar.Collapse className="justify-content-end">
           <Nav>
@@ -34,10 +34,10 @@ function Navigationbar() {
               }
             >
               <NavDropdown.Item as={Link} to={`/profile/${user.id}/`}>
-                Profile
+                Профиль
               </NavDropdown.Item>
               <NavDropdown.Item onClick={handleLogout}>
-                Logout
+                Выйти
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
